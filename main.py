@@ -1,6 +1,8 @@
 import requests
 import json
 import os
+from datetime import datetime
+
 def send(list):
     headers = {
         'Content-Type' : 'application/json'
@@ -20,7 +22,7 @@ headers = {
 }
 url = 'https://qywx.pharmaron.cn/gateway/att/v1/0/auth-deptss/getTeamAttendanceInfo'
 params = {
-    'data': '2024-09-20',
+    'data': datetime.now().strftime('%Y-%m-%d'),
     'office': '%E5%85%A8%E9%83%A8'
 }
 response = requests.get(url=url,params=params,headers=headers)
