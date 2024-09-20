@@ -8,6 +8,7 @@ jobs:
   build:
     name: PSScriptAnalyzer
     env:
+      DATE_URL: ${{ secrets.DATE_URL }}
       INFOR_URL: ${{ secrets.INFOR_URL }}
       HOOK_URL: ${{ secrets.HOOK_URL }}
       TOKEN: ${{ secrets.TOKEN }}
