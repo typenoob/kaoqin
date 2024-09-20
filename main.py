@@ -18,23 +18,29 @@ def send(list):
     response = requests.post(url=url,data=json.dumps(body),headers=headers)
     print(response.text)
 headers = {
-    'Authorization': 'Bearer {}'.format(os.environ['token'])
+    'Authorization': 'Bearer {}'.format(os.environ['TOKEN'])
 }
+url = os.environ['DATE_URL']
+response = requests.get(url=url,headers=headers)
+if response.status_code != 200 :
+    raise SystemError('token is expired or invalid')
+data = json.loads(response.text)['data']
+if data['type'] != 'weekday':
+    raise AssertionError("today is not workday")
 url = os.environ['INFOR_URL']
 params = {
     'data': datetime.now().strftime('%Y-%m-%d'),
     'office': '%E5%85%A8%E9%83%A8'
 }
 response = requests.get(url=url,params=params,headers=headers)
+if response.status_code != 200 :
+    raise SystemError('token is expired or invalid')
 text = response.text
-if response.status_code == 200 :
-    data = json.loads(text)['data']
-    userList = []
-    for person in data :
-        if not person['leave']:
-            print('user {} is not checkout'.format(person['userId']))
-            userList.append(person['userId'])
-    send(userList)
-else:
-    print('token is expired or invalid')
+data = json.loads(text)['data']
+userList = []
+for person in data :
+    if not person['leave']:
+        print('user {} is not checkout'.format(person['userId']))
+        userList.append(person['userId'])
+send(userList)
 
