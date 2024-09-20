@@ -18,7 +18,7 @@ def send(list):
     response = requests.post(url=url,data=json.dumps(body),headers=headers)
     print(response.text)
 headers = {
-    'Authorization': 'Bearer ee0fa132-e4d7-4f37-bfdd-5a327373facf'
+    'Authorization': 'Bearer {}'.format(os.environ['token'])
 }
 url = os.environ['INFOR_URL']
 params = {
