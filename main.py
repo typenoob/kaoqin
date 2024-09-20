@@ -7,7 +7,7 @@ def send(list):
     headers = {
         'Content-Type' : 'application/json'
     }
-    url = os.environ['URL']
+    url = os.environ['HOOK_URL']
     body = {
         'msgtype' : 'text',
         'text' : {
@@ -20,7 +20,7 @@ def send(list):
 headers = {
     'Authorization': 'Bearer ee0fa132-e4d7-4f37-bfdd-5a327373facf'
 }
-url = 'https://qywx.pharmaron.cn/gateway/att/v1/0/auth-deptss/getTeamAttendanceInfo'
+url = os.environ['INFOR_URL']
 params = {
     'data': datetime.now().strftime('%Y-%m-%d'),
     'office': '%E5%85%A8%E9%83%A8'
