@@ -39,7 +39,7 @@ text = response.text
 data = json.loads(text)['data']
 userList = []
 for person in data :
-    if not person['signOut']:
+    if 'signOut' in person and not person['signOut']:
         print('user {} is not checkout'.format(person['userId']))
         userList.append(person['userId'])
 send(userList)
