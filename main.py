@@ -4,6 +4,8 @@ import os
 from datetime import datetime
 
 def send(list):
+    content= "请注意⚠下班未打卡⏰"
+    if len(list) == 0 : content = "所有人都已打卡✌"
     headers = {
         'Content-Type' : 'application/json'
     }
@@ -11,7 +13,7 @@ def send(list):
     body = {
         'msgtype' : 'text',
         'text' : {
-            'content' : '请注意⚠下班未打卡⏰',
+            'content' : content,
             'mentioned_list': list
         }
     }
