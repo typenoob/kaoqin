@@ -27,8 +27,8 @@ response = requests.get(url=url,headers=headers)
 if response.status_code != 200 :
     raise SystemError('token is expired or invalid')
 data = json.loads(response.text)['data']
-if data['type'] != 'weekday':
-    raise AssertionError("today is not workday")
+if data['type'] != 'weekday' and data['type'] != 'workday':
+    raise AssertionError("today is not weekday or workday")
 url = os.environ['INFOR_URL']
 params = {
     'data': datetime.now().strftime('%Y-%m-%d'),
